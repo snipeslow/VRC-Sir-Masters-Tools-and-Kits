@@ -17,6 +17,7 @@ public class SetCameraToViewPointToolWindow : EditorWindow
     float Distance = 0.5f;
     float Factor = 0.28f;
     bool UseFactor = false;
+    VRC_AvatarDescriptor avatarDescriptor;
     [MenuItem("SMTaK/Set Camera To ViewPoint Tool")]
     public static void ShowWindow()
     {
@@ -39,6 +40,8 @@ public class SetCameraToViewPointToolWindow : EditorWindow
             EditorGUILayout.LabelField("This tool will position VRCCam to your viewpoint and at the distance you want, either with a fixed value or a factor based on height.", WrapTextStyle);
 
         }
+        EditorGUILayout.Space();
+        avatarDescriptor = (VRC_AvatarDescriptor)EditorGUILayout.ObjectField("Target Avatar", avatarDescriptor, typeof(VRC_AvatarDescriptor), true);
         EditorGUILayout.Space();
         UseFactor = EditorGUILayout.Toggle("Use Factor", UseFactor);
         if (UseFactor)
@@ -66,12 +69,15 @@ public class SetCameraToViewPointToolWindow : EditorWindow
     void RunThis()
     {
         GameObject vrcCam = GameObject.Find("VRCCam");
-        PipelineSaver pipelineSaver = Component.FindObjectOfType<PipelineSaver>();
-        if (vrcCam && pipelineSaver)
+        //PipelineSaver pipelineSaver = Component.FindObjectOfType<PipelineSaver>();
+        if (vrcCam /*&& pipelineSaver*/)
         {
-            VRC_AvatarDescriptor avatarDescriptor = pipelineSaver.GetComponent<VRC_AvatarDescriptor>();
-            vrcCam.transform.position = pipelineSaver.transform.position;
-            vrcCam.transform.position += avatarDescriptor.ViewPosition;
+            //VRC_AvatarDescriptor avatarDescriptor = pipelineSaver.GetComponent<VRC_AvatarDescriptor>();
+            if(avatarDescriptor)
+            {
+                vrcCam.transform.position = avatarDescriptor.transform.position;
+                vrcCam.transform.position += avatarDescriptor.ViewPosition;
+            }
             if (UseFactor)
             {
                 vrcCam.transform.position += new Vector3(0, 0, vrcCam.transform.position.y * Factor);
