@@ -16,6 +16,12 @@ namespace SirMasters.DynamicBoneTools
 {
     public class DynamicBoneToolsWindow : EditorWindow
     {
+        [MenuItem("SMTaK/DynamicBone Copy Tool (Deprecated)")]
+        public static void ShowWindow()
+        {
+            Debug.LogWarning("SMTak DynamicBone Copy Tool is deprecated, please wait for the Physbone version!");
+        }
+        /*
         [MenuItem("CONTEXT/DynamicBone/(DEBUG)Print Json")]
         static public void DynamicBonePrintData(MenuCommand command)
         {
@@ -373,5 +379,6 @@ namespace SirMasters.DynamicBoneTools
             }
 
         }
+        */
     }
 }
