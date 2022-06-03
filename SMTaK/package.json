@@ -1,0 +1,9 @@
+{
+  "name": "com.sirmasters.tools-and-kits",
+  "version": "0.0.1",
+  "displayName": "SirMasters' Tools and Kits",
+  "description": "A toolset by Snipeslow/SirMasters",
+  "author": {
+    "name": "Snipeslow/SirMasters",
+  }
+}
